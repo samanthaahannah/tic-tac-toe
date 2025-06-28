@@ -5,44 +5,46 @@ board = [[' ', ' ', ' '],[ ' ', ' ', ' '],[ ' ', ' ', ' ']]
 endgame = false
 marker = "O"
 
-def restart(board, endgame, marker)
+def restart(main_board, player, board, endgame, marker)
   board = [[' ', ' ', ' '],[ ' ', ' ', ' '],[ ' ', ' ', ' ']]
   endgame = false
   marker = 'O'
-  play_game(board, endgame, marker)
+  play_game(main_board, player, board, endgame, marker)
 end
 
-def get_answer(board, endgame, marker, input)
+def get_answer(main_board, player, board, endgame, marker, input)
   case
   when input.downcase == 'y'
-    restart(board, endgame, marker)
+    restart(main_board, player, board, endgame, marker)
   when input.downcase == 'n' 
     puts "Closing game"
     exit
   else
     puts "Invalid input"
-    play_game(board, endgame, marker)
+    play_game(main_board, player, board, endgame, marker)
   end
 end
 
-def play_game(board, endgame, marker)
-  main_board = Board.new
-  player = Player.new
+def end_game(main_board, player, board, endgame, marker)
+  puts "Do you want to play again?"
+  input = gets.chomp
+  get_answer(main_board, player, board, endgame, marker, input)
+end
+
+def play_game(main_board, player, board, endgame, marker)
   main_board.draw_board(board)
   unless endgame == true
-    if marker == "X"
-      marker = "O"
-    elsif marker == "O"
-      marker = "X"
-    end
-    p endgame
+    if marker == "X" then marker = "O"
+    elsif marker == "O" then marker = "X" end
     player.place_marker(board, marker, endgame)
-    player.get_winning_lines(board, endgame, marker)
+    player.get_winning_lines(main_board, player, board, endgame, marker)
   else
-    puts "Do you want to play again?"
-    input = gets.chomp
-    get_answer(board, endgame, marker, input)
+    end_game(main_board, player, board, endgame, marker)
   end
 end
 
-play_game(board, endgame, marker)
+main_board = Board.new
+player = Player.new
+
+
+play_game(main_board, player, board, endgame, marker)

@@ -16,7 +16,7 @@ class Player
     end
   end
 
-  def get_winning_lines(board, endgame, marker)
+  def get_winning_lines(main_board, player, board, endgame, marker)
     rows = [board[0].flatten, board[1].flatten, board[2].flatten]
 
     cols = [[board[0][0], board[1][0], board[2][0]].flatten, 
@@ -30,30 +30,30 @@ class Player
     when ((rows.any?{ |rows| rows.all? { |char| char == "X"}}) == true)
       puts "Player 1 wins!"
       endgame = true
-      play_game(board, endgame, marker)
+      play_game(main_board, player, board, endgame, marker)
     when ((rows.any?{ |rows| rows.all? { |char| char == "O"}}) == true)
       puts "Player 2 wins!"
       endgame = true
-      play_game(board, endgame, marker)
+      play_game(main_board, player, board, endgame, marker)
     when ((cols.any?{ |cols| cols.all? { |char| char == "X"}}) == true)
       puts "Player 1 wins!"
       endgame = true
-      play_game(board, endgame, marker)
+      play_game(main_board, player, board, endgame, marker)
     when ((cols.any?{ |cols| cols.all? { |char| char == "O"}}) == true)
       puts "Player 2 wins!"
       endgame = true
-      play_game(board, endgame, marker)
+      play_game(main_board, player, board, endgame, marker)
     when ((diags.any?{ |diags| diags.all? { |char| char == "X"}}) == true)
       puts "Player 1 wins!"
       endgame = true
-      play_game(board, endgame, marker)
+      play_game(main_board, player, board, endgame, marker)
     when ((diags.any?{ |diags| diags.all? { |char| char == "O"}}) == true)
       puts "Player 2 wins!"
       endgame = true
-      play_game(board, endgame, marker)
+      play_game(main_board, player, board, endgame, marker)
     else
       endgame = false
-      play_game(board, endgame, marker)
+      play_game(main_board, player, board, endgame, marker)
     end
   end
 end 
