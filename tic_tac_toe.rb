@@ -33,18 +33,17 @@ end
 
 def play_game(main_board, player, board, endgame, marker)
   main_board.draw_board(board)
-  unless endgame == true
+  if endgame == false
     if marker == "X" then marker = "O"
     elsif marker == "O" then marker = "X" end
-    player.place_marker(board, marker, endgame)
+    player.place_marker(main_board, player, board, endgame, marker)
     player.get_winning_lines(main_board, player, board, endgame, marker)
-  else
+  elsif endgame == true
     end_game(main_board, player, board, endgame, marker)
   end
 end
 
 main_board = Board.new
 player = Player.new
-
 
 play_game(main_board, player, board, endgame, marker)
